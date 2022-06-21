@@ -13,6 +13,17 @@
   }
 }
 
+.hding{
+  text-align: center;
+  margin-top: 20px;
+  font-family: Fantasy, Helvetica, sans-serif;
+}
+
+.table{
+  margin-top: 40px;
+  text-align: center;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
