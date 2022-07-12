@@ -13,10 +13,22 @@
   }
 }
 
+.center-navbar {
+  width:30%;
+  margin-left: 42%;
+}
+ .btn{
+  
+  margin-left: 40%;
+ }
 .hding{
   text-align: center;
   margin-top: 20px;
   font-family: Fantasy, Helvetica, sans-serif;
+}
+
+.stl{
+  padding: 15px 15px 15px 15px;
 }
 
 .table{
