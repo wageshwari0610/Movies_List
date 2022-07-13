@@ -43,7 +43,7 @@ class App extends Component {
     const counters=this.state.counters.forEach(counter=>(
       counter.value=0
       )); 
-      // this.setState({counters});
+      //  this.setState({counters});
       console.log("HELLO");
   }
   render() { 
