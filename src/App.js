@@ -40,10 +40,11 @@ class App extends Component {
     this.setState({counters});
   }
   onReset=()=>{
-    const counters=this.state.counters.forEach(counter=>(
+    const counters=[...this.state.counters];
+    counters.forEach(counter=>(
       counter.value=0
       )); 
-      //  this.setState({counters});
+      this.setState({counters});
       console.log("HELLO");
   }
   render() { 
