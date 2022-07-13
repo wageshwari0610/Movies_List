@@ -8,7 +8,7 @@ const NavBar = (props) => {
         <a className="navbar-brand center-navbar" href="#">
           {" "}
           <span className="bage badge=pill badge-seconary ">
-            {props.len} <h1>Hello world</h1>
+            {props.len} 
             
           </span>
           

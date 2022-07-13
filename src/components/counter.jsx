@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 
 class Counter extends Component {
- 
+  formatText(){
+    return this.props.counter.value===0?"btn btn-secondary":"btn btn-primary";
+  }
 
   render() { 
     return (

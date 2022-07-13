@@ -14,9 +14,7 @@ class App extends Component {
     ]
    } ;
     
-  formatText(){
-    return this.state.counters.value===0?"btn btn-secondary":"btn btn-primary";
-  }
+  
  
    handleIncrement=(counter)=>{
     const counters=[...this.state.counters];
@@ -41,9 +39,12 @@ class App extends Component {
     const counters=this.state.counters.filter(c => c.id !== counterID);
     this.setState({counters});
   }
-  handleReset(){
-    this.state.counters.map(counters=>(
-      counters.value=0)); 
+  onReset=()=>{
+    const counters=this.state.counters.forEach(counter=>(
+      counter.value=0
+      )); 
+      // this.setState({counters});
+      console.log("HELLO");
   }
   render() { 
     return (
@@ -52,15 +53,14 @@ class App extends Component {
       <main className='container'>
        {this.state.counters.map(counter=>(
           <Counters key={counter.id}
-          onIncrement={this.props.handleIncrement}
-          onDecrement={this.props.handleDecrement}
-          onDelete={this.props.handleDelete}
+          onIncrement={this.handleIncrement}
+          onDecrement={this.handleDecrement}
+          onDelete={this.handleDelete}
           counter={counter}
-          onReset={this.props.handleReset}>
+          onReset={this.handleReset}>
             </Counters>))}
-          
-          
-      </main>
+          </main>
+          <button className='btn btn-info btn-lg'  onClick={this.onReset}>RESET</button>
       </React.Fragment>
     );
   }
