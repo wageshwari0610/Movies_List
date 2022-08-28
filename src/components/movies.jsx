@@ -16,14 +16,13 @@ class Movies extends Component {
     genres:[]
   };
   componentDidMount(){
-    this.setState({movies: getMovies(), genres: getGenres()});
+    this.setState({movies: getMovies() , genres: getGenres()});
   }
 
   handleGenreSelect = genre => {
-    console.log(genre);
-  }
-
-  
+    this.setState({selectedGenre : genre});
+    console.log(this.state);
+  };
 
   handleLike = () => {
     console.log("HELLO");
@@ -38,23 +37,39 @@ class Movies extends Component {
   }
 
   render() {
-    const {pageSize,currentPage,movies}=this.state;
-    const movie = paginate(movies,currentPage,pageSize);
-    if (movies.length === 0) {
+    const { length : count} = this.state.movies;
+    const {
+      pageSize,
+      selectedGenre,
+      currentPage,
+      movies : allMovies
+    }=this.state;
+
+    
+    if (count === 0) {
       return <p className="hding">There are no movies in Database</p>;
     }
+
+    const filtered = selectedGenre 
+    ? allMovies.filter((items) => items._id===selectedGenre._id) 
+    : allMovies;
+
+    const movie = paginate(filtered,currentPage,pageSize);
+   
     
     return (
       <div className="row">
       <div className="col-2">
+        <div className="margin_design">
         <ListGroup
         items={this.state.genres}
-        onItemSelect={this.handleGenreSelect}/>
-      </div>
+        onItemSelect={this.handleGenreSelect}
+        selectedValue={selectedGenre}/>
+      </div></div>
       <div className="col">
       <div className="container">
         <h3 className="hding">
-          Showing {movies.length} Movies in the database .
+          Showing {filtered.length} Movies in the database .
         </h3>
         <table className="table">
           <thead>
@@ -72,6 +87,8 @@ class Movies extends Component {
                 <tr key={movie._id}>
                   <td>{movie.title}</td>
                   <td>{movie.genre.name}</td>
+                  <td>{movie.numberInStock}</td>
+                  <td>{movie.dailyRentalRate}</td>
                   <td>
                     <button
                       onClick={() => this.handleDelete(movie)}
@@ -85,7 +102,7 @@ class Movies extends Component {
           </tbody>
         </table>
         <Pagination
-          itemsCount={this.state.movies.length}
+          itemsCount={filtered.length}
           pageSize={this.state.pageSize}
           currentPage={currentPage}
           onPageChange={this.handlePageChange}
