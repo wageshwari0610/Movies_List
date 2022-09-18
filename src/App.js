@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import './App.css';
-import Movies from "./movies.jsx";
+import Movies from "./components/movies.jsx";
 
 class App extends Component{
   render(){
