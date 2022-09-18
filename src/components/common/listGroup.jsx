@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 
 const ListGroup = props => {
-  const { items , name , value , selectedValue } = props;
+  const { items , name , value ,selectedValue } = props;
   return (
-    <ul className="list-group">
+    <div>
       {items.map((item) => (
         <li key={item[value]}
         onClick={()=> props.onItemSelect(item)}
@@ -11,8 +11,10 @@ const ListGroup = props => {
             {item[name] }
             
         </li> 
+        
       ))}
-    </ul>
+    
+    </div>
     
     
   );
