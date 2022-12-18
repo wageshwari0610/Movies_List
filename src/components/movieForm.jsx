@@ -5,6 +5,9 @@ import { getGenres } from "../services/fakeGenreService";
 import { getMovie, saveMovie } from "../services/fakeMovieService";
 import { useParams } from "react-router-dom";
 
+function withParams(Component) {
+  return (props) => <Component {...props} params={useParams()} />;
+}
 class MovieForm extends Form {
   state = {
     data: {
@@ -20,12 +23,11 @@ class MovieForm extends Form {
   componentDidMount() {
     const genres = getGenres();
     this.setState({ genres });
+    const { id } = this.props.params;
+    if (id === "new") return;
 
-    const { movieId } = useParams();
-    if (movieId === "new") return;
-
-    const movie = getMovie(movieId);
-    if (!movie) return this.props.history.replace("/not-found");
+    const movie = getMovie(id);
+    if (!movie) return window.location.pathname.replace("/not-found");
 
     this.setState({ data: this.mapToViewModel(movie) });
   }
@@ -81,4 +83,4 @@ class MovieForm extends Form {
   }
 }
 
-export default MovieForm;
+export default withParams(MovieForm);

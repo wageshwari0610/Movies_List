@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Rentals from "./components/rentals";
 import Customers from "./components/customers";
-import notFound from "./components/notFound";
+import NotFound from "./components/notFound";
 import LoginForm from "./components/loginForm";
 import Movies from "./components/movies";
 import NavBar from "./components/navBar";
 import MovieForm from "./components/movieForm";
 import Register from "./components/register";
-
 import "./App.css";
 
 class App extends Component {
@@ -23,7 +22,7 @@ class App extends Component {
             <Route path="/movies" element={<Movies />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/rentals" element={<Rentals />} />
-            <Route path="/not-found" element={<notFound />} />
+            <Route path="/not-found" element={<NotFound />} />
             <Route path="/register" element={<Register />} />
             <Route path="/movies/new" element={<MovieForm />} />
             <Route path="/" element={<Navigate to="/movies" />} />
