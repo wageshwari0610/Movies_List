@@ -8,15 +8,6 @@ class Form extends Component {
     errors: {},
   };
 
-  schema = {
-    username: Joi.string()
-      .required()
-      .label("Username"),
-    password: Joi.string()
-      .required()
-      .label("Password"),
-  };
-
   validate = () => {
     const { error } = Joi.validate(this.state.data, this.schema, {
       abortEarly: false,

@@ -3,7 +3,11 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import { getGenres } from "../services/fakeGenreService";
 import { getMovie, saveMovie } from "../services/fakeMovieService";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+
+function withParams(Component) {
+  return (props) => <Component {...props} params={useParams()} />;
+}
 
 class MovieForm extends Form {
   state = {
@@ -20,19 +24,20 @@ class MovieForm extends Form {
   componentDidMount() {
     const genres = getGenres();
     this.setState({ genres });
-
-    const { movieId } = useParams();
+    const { id: movieId } = this.props.params;
     if (movieId === "new") return;
 
     const movie = getMovie(movieId);
-    if (!movie) return this.props.history.replace("/not-found");
+    if (!movie) {
+      return <Navigate to="/not-found" />;
+    }
 
     this.setState({ data: this.mapToViewModel(movie) });
   }
 
   schema = {
     _id: Joi.string(),
-    itle: Joi.string()
+    title: Joi.string()
       .required()
       .label("Title"),
     genre: Joi.string()
@@ -43,11 +48,11 @@ class MovieForm extends Form {
       .min(0)
       .max(100)
       .label("Number In Stock"),
-    daiyRentalRate: Joi.number()
+    dailyRentalRate: Joi.number()
       .required()
       .min(0)
       .max(100)
-      .label("Daily Rental Rate"),
+      .label("Rate"),
   };
 
   mapToViewModel(movie) {
@@ -81,4 +86,4 @@ class MovieForm extends Form {
   }
 }
 
-export default MovieForm;
+export default withParams(MovieForm);

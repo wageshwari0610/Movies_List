@@ -7,6 +7,7 @@ import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
 import { getGenres } from "../services/fakeGenreService";
 import MovieTable from "./MovieTable";
+import SearchBox from "./searchBox";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
@@ -15,6 +16,8 @@ class Movies extends Component {
     movies: [],
     pageSize: 4,
     currentPage: 1,
+    searchQuery: "",
+    selectedGenre: null,
     genres: [],
     sortColumn: { path: "title", order: "asc" },
   };
@@ -24,7 +27,7 @@ class Movies extends Component {
   }
 
   handleGenreSelect = (genre) => {
-    this.setState({ selectedGenre: genre, currentPage: 1 });
+    this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1 });
   };
 
   handleDelete = (movie) => {
@@ -40,11 +43,16 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
+  handleSearch = (query) => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
+  };
+
   render() {
     const { length: count } = this.state.movies;
     const {
       pageSize,
       selectedGenre,
+      searchQuery,
       currentPage,
       movies: allMovies,
       sortColumn,
@@ -54,10 +62,15 @@ class Movies extends Component {
       return <p className="hding">There are no movies in Database</p>;
     }
 
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter((items) => items.genre.name === selectedGenre.name)
-        : allMovies;
+    let filtered = allMovies;
+    if (searchQuery)
+      filtered = allMovies.filter((m) =>
+        m.title.toLowerCase().startWith(searchQuery.toLowerCase())
+      );
+    else if (selectedGenre && selectedGenre._id)
+      filtered = allMovies.filter(
+        (items) => items.genre._id === selectedGenre._id
+      );
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
     const movie = paginate(sorted, currentPage, pageSize);
@@ -91,6 +104,8 @@ class Movies extends Component {
               onSort={this.handleSorting}
               sortColumn={sortColumn}
             />
+            <SearchBox value={searchQuery} onChange={this.handleSearch} />
+
             <Pagination
               itemsCount={filtered.length}
               pageSize={this.state.pageSize}
