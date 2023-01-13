@@ -18,16 +18,19 @@ class App extends Component {
         <NavBar />
         <main className="container">
           <Routes>
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/movies/:id" element={<MovieForm />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/customers" element={<Customers />} />
-            <Route path="/rentals" element={<Rentals />} />
-            <Route path="/not-found" element={<notFound />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/movies/new" element={<MovieForm />} />
-            <Route path="/" element={<Navigate to="/movies" />} />
-            <Route path="*" element={<Navigate to="/not-found" />} />
+            <Route path="/Movies_List/login" element={<LoginForm />} />
+            <Route path="/Movies_List/movies/:id" element={<MovieForm />} />
+            <Route path="/Movies_List/movies" element={<Movies />} />
+            <Route path="/Movies_List/customers" element={<Customers />} />
+            <Route path="/Movies_List/rentals" element={<Rentals />} />
+            <Route path="/Movies_List/not-found" element={<notFound />} />
+            <Route path="/Movies_List/register" element={<Register />} />
+            <Route path="/Movies_List/movies/new" element={<MovieForm />} />
+            <Route path="/" element={<Navigate to="/Movies_List/movies" />} />
+            <Route
+              path="*"
+              element={<Navigate to="/Movies_List/not-found" />}
+            />
           </Routes>
         </main>
       </React.Fragment>
