@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">
+      <Link className="navbar-brand" to="/Movies_List/">
         Vidly
       </Link>
       <button
@@ -20,19 +20,19 @@ const NavBar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/movies">
+          <NavLink className="nav-item nav-link" to="/Movies_List/movies">
             Movies
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/customers">
+          <NavLink className="nav-item nav-link" to="/Movies_List/customers">
             Customers
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/rentals">
+          <NavLink className="nav-item nav-link" to="/Movies_List/rentals">
             Rentals
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/login">
+          <NavLink className="nav-item nav-link" to="/Movies_List/login">
             Login
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/register">
+          <NavLink className="nav-item nav-link" to="/Movies_List/register">
             Register
           </NavLink>
         </div>

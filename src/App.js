@@ -31,7 +31,7 @@ class App extends Component {
               element={<Navigate to="/Movies_List/movies" />}
             />
             <Route
-              path="*"
+              path="/Movies_List/*"
               element={<Navigate to="/Movies_List/not-found" />}
             />
           </Routes>
