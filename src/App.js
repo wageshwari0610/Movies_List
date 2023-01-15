@@ -26,7 +26,10 @@ class App extends Component {
             <Route path="/Movies_List/not-found" element={<notFound />} />
             <Route path="/Movies_List/register" element={<Register />} />
             <Route path="/Movies_List/movies/new" element={<MovieForm />} />
-            <Route path="/" element={<Navigate to="/Movies_List/movies" />} />
+            <Route
+              path="/Movies_List/"
+              element={<Navigate to="/Movies_List/movies" />}
+            />
             <Route
               path="*"
               element={<Navigate to="/Movies_List/not-found" />}
