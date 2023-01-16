@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Rentals from "./components/rentals";
 import Customers from "./components/customers";
-import notFound from "./components/notFound";
+import NotFound from "./components/notFound";
 import LoginForm from "./components/loginForm";
 import Movies from "./components/movies";
 import NavBar from "./components/navBar";
@@ -23,7 +23,7 @@ class App extends Component {
             <Route path="/Movies_List/movies" element={<Movies />} />
             <Route path="/Movies_List/customers" element={<Customers />} />
             <Route path="/Movies_List/rentals" element={<Rentals />} />
-            <Route path="/Movies_List/not-found" element={<notFound />} />
+            <Route path="/Movies_List/not-found" element={<NotFound />} />
             <Route path="/Movies_List/register" element={<Register />} />
             <Route path="/Movies_List/movies/new" element={<MovieForm />} />
             <Route

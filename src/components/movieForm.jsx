@@ -3,17 +3,19 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import { getGenres } from "../services/fakeGenreService";
 import { getMovie, saveMovie } from "../services/fakeMovieService";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 
-function withParams(Component) {
-  return (props) => <Component {...props} params={useParams()} />;
-}
+const withParams = (Component) => (props) => {
+  let history = useNavigate();
+  let params = useParams();
+  return <Component {...props} params={params} history={history} />;
+};
 
 class MovieForm extends Form {
   state = {
     data: {
       title: "",
-      genreId: "",
+      genre: "",
       numberInStock: "",
       dailyRentalRate: "",
     },
@@ -29,7 +31,7 @@ class MovieForm extends Form {
 
     const movie = getMovie(movieId);
     if (!movie) {
-      return <Navigate to="/not-found" />;
+      return <Navigate to="/Movies_List/not-found" />;
     }
 
     this.setState({ data: this.mapToViewModel(movie) });
@@ -59,7 +61,7 @@ class MovieForm extends Form {
     return {
       _id: movie._id,
       title: movie.title,
-      genreId: movie.genre._id,
+      genre: movie.genre._id,
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate,
     };
@@ -67,7 +69,7 @@ class MovieForm extends Form {
 
   doSubmit = () => {
     saveMovie(this.state.data);
-    this.props.history.push("/movies");
+    this.props.history("Movies_List/movies");
   };
 
   render() {
@@ -76,7 +78,7 @@ class MovieForm extends Form {
         <h1> Movie Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
-          {this.renderSelect("genreId", "Genre", this.state.genres)}
+          {this.renderSelect("genre", "Genre", this.state.genres)}
           {this.renderInput("numberInStock", "Number In Stock")}
           {this.renderInput("dailyRentalRate", "Rate")}
           {this.renderButton("Save")}
