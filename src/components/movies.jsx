@@ -65,7 +65,7 @@ class Movies extends Component {
     let filtered = allMovies;
     if (searchQuery)
       filtered = allMovies.filter((m) =>
-        m.title.toLowerCase().startWith(searchQuery.toLowerCase())
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     else if (selectedGenre && selectedGenre._id)
       filtered = allMovies.filter(
@@ -88,7 +88,7 @@ class Movies extends Component {
         </div>
         <div className="col">
           <Link
-            to="/movies/new"
+            to="/Movies_List/movies/new"
             className="btn btn-primary"
             style={{ marginBottom: 20 }}
           >

@@ -4,7 +4,7 @@ import Input from "./input";
 import Select from "./select";
 class Form extends Component {
   state = {
-    data: {},
+    data: { username: "", password: "" },
     errors: {},
   };
 
@@ -12,6 +12,7 @@ class Form extends Component {
     const { error } = Joi.validate(this.state.data, this.schema, {
       abortEarly: false,
     });
+    console.log(error, this.state);
     if (!error) return null;
     const errors = {};
     for (let items of error.details) errors[items.path[0]] = items.message;
@@ -34,12 +35,15 @@ class Form extends Component {
     const data = { ...this.state.data };
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ data, errors });
+    console.log(this.state);
   };
 
   validateProperty = ({ name, value }) => {
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
+    const { error } = Joi.validate(obj, schema, {
+      abortEarly: false,
+    });
     return error ? error.details[0].message : null;
   };
 
